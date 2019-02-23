@@ -14,7 +14,7 @@ void Results::addSolved(const to25::Board& board)
     board.output();
 }
 
-void Results::addDeadEnd(const to25::Board& board)
+void Results::addDeadEnd([[maybe_unused]] const to25::Board& board)
 {
     mNumDeadEnds++;
 };

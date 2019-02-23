@@ -2,15 +2,17 @@
 
 #include "solver.hpp"
 
+namespace to25 {
+
 const std::array<position_t, 8> Solver::sPositionUpdates{
-        position_t{ -3, 0 }, // N
-        position_t{ -2, 2 }, // NE
-        position_t{ 0, 3 },  // E
-        position_t{ 2, 2 },  // SE
-        position_t{ 3, 0 },  // S
-        position_t{ 2, -2 }, // SW
-        position_t{ 0, -3 }, // W
-        position_t{ -2, -2 } // NW
+    position_t{ -3, 0 }, // N
+    position_t{ -2, 2 }, // NE
+    position_t{ 0, 3 },  // E
+    position_t{ 2, 2 },  // SE
+    position_t{ 3, 0 },  // S
+    position_t{ 2, -2 }, // SW
+    position_t{ 0, -3 }, // W
+    position_t{ -2, -2 } // NW
 };
 
 bool Solver::isAllowedPosition(Board& board, position_t pos) const
@@ -76,3 +78,5 @@ void Solver::solve(Board& board) const
         direction = addedDirection.value();
     }
 }
+
+}; // namespace to25

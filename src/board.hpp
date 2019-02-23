@@ -7,7 +7,7 @@
 
 #include "types.hpp"
 
-using namespace game;
+namespace to25 {
 
 class Board {
 
@@ -35,5 +35,7 @@ private:
     positions_t mPositions;
     order_t mOrder;
 };
+
+} // namespace to25
 
 #endif

@@ -4,6 +4,8 @@
 
 #include "board.hpp"
 
+namespace to25 {
+
 Board::Board(const int width, const int height) :
     mWidth(width),
     mHeight(height)
@@ -77,3 +79,5 @@ bool Board::isSolved() const
 {
     return (mOrder.size() >= mWidth * mHeight);
 }
+
+} // namespace to25

@@ -8,7 +8,7 @@
 #include "board.hpp"
 #include "types.hpp"
 
-using namespace game;
+namespace to25 {
 
 class Solver {
 
@@ -36,4 +36,5 @@ private:
     static const std::array<position_t, 8> sPositionUpdates;
 };
 
+} // namespace to25
 #endif

@@ -5,7 +5,7 @@
 #include <set>
 #include <vector>
 
-namespace game {
+namespace to25 {
 
 	using position_t = std::pair<int, int>;
 	using positions_t = std::set<position_t>;

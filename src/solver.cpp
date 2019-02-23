@@ -13,35 +13,66 @@ const std::array<position_t, 8> Solver::sPositionUpdates{
         position_t{ -2, -2 } // NW
 };
 
-bool Solver::isAllowedPosition(Board& s, position_t pos) const
+bool Solver::isAllowedPosition(Board& board, position_t pos) const
 {
     return ((pos.first >= 0) &&
-        (pos.first < s.width()) &&
+        (pos.first < board.width()) &&
         (pos.second >= 0) &&
-        (pos.second < s.height()));
+        (pos.second < board.height()));
 }
 
-std::optional<Solver::direction_t> Solver::nextMove(Board& s, direction_t startDirection) const
+std::optional<Solver::direction_t> Solver::nextPosition(Board& board, direction_t startDirection) const
 {
-    assert(s.latest().has_value());
+    assert(board.latest().has_value());
     assert(startDirection <= NW);
 
-    if (!s.latest().has_value()) {
+    if (!board.latest().has_value()) {
+        // The board has to have at least one position.
         return std::nullopt;
     }
 
     for (direction_t dir = startDirection; dir < sPositionUpdates.size(); ++dir) {
-        position_t newPosition = s.latest().value();
+        position_t newPosition = board.latest().value();
 
         newPosition.first += sPositionUpdates[dir].first;
         newPosition.second += sPositionUpdates[dir].second;
 
-        if (isAllowedPosition(s, newPosition)) {
-            if (s.insert(newPosition)) {
+        if (isAllowedPosition(board, newPosition)) {
+            if (board.insert(newPosition)) {
+                // Returns the direction from previous position to the just added position.  
                 return dir;
             }
         }
     }
 
+    // No available moves from the latest position.
     return std::nullopt;
+}
+
+void Solver::solve(Board& board) const
+{
+    Solver::direction_t direction = Solver::Directions::N;
+
+    for (; direction <= Solver::Directions::NW; ++direction) {
+        auto addedDirection = nextPosition(board, direction);
+
+        if (board.isSolved()) {
+            board.output();
+            // Pop the just added board solving position.
+            board.pop_back();
+            break;
+        }
+
+        if (!addedDirection.has_value()) {
+            break;
+        }
+
+        // Recursively call this function to test the further positions.
+        solve(board);
+
+        // Pop the previous position.
+        board.pop_back();
+
+        direction = addedDirection.value();
+    }
 }

@@ -26,10 +26,11 @@ public:
         NW
     };
 
+    bool isAllowedPosition(Board& board, position_t pos) const;
 
-    bool isAllowedPosition(Board& s, position_t pos) const;
+    std::optional<direction_t> nextPosition(Board& board, direction_t startDirection) const;
 
-    std::optional<direction_t> nextMove(Board& s, direction_t startDirection) const;
+    void solve(Board& board) const;
 
 private:
     static const std::array<position_t, 8> sPositionUpdates;

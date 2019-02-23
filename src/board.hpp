@@ -26,6 +26,8 @@ public:
     int width() const;
     int height() const;
 
+    bool isSolved() const;
+
 private:
     int mWidth;
     int mHeight;

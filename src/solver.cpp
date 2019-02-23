@@ -24,6 +24,7 @@ bool Solver::isAllowedPosition(Board& s, position_t pos) const
 std::optional<Solver::direction_t> Solver::nextMove(Board& s, direction_t startDirection) const
 {
     assert(s.latest().has_value());
+    assert(startDirection <= NW);
 
     if (!s.latest().has_value()) {
         return std::nullopt;

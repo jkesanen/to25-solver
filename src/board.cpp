@@ -72,3 +72,8 @@ int Board::height() const
 {
     return mHeight;
 }
+
+bool Board::isSolved() const
+{
+    return (mOrder.size() >= mWidth * mHeight);
+}

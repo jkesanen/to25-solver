@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "board.hpp"
+#include "results.hpp"
 #include "solver.hpp"
 
 int main(int argc, char** argv)
@@ -12,9 +13,14 @@ int main(int argc, char** argv)
     to25::Board gameboard(5, 5);
     gameboard.insert(to25::position_t(0, 0));
 
-    // Start solver
+    Results results;
+
+    // Start solver.
     to25::Solver solver;
-    solver.solve(gameboard);
+    solver.solve(gameboard, results);
+
+    // Output solving statistics.
+    results.printStats();
 
     return 0;
 }

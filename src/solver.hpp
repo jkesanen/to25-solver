@@ -6,6 +6,7 @@
 #include <optional>
 
 #include "board.hpp"
+#include "resultbase.hpp"
 #include "types.hpp"
 
 namespace to25 {
@@ -30,7 +31,7 @@ public:
 
     std::optional<direction_t> nextPosition(Board& board, direction_t startDirection) const;
 
-    void solve(Board& board) const;
+    void solve(Board& board, ResultBase& results) const;
 
 private:
     static const std::array<position_t, 8> sPositionUpdates;

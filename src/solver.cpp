@@ -51,7 +51,7 @@ std::optional<Solver::direction_t> Solver::nextPosition(Board& board, direction_
     return std::nullopt;
 }
 
-void Solver::solve(Board& board) const
+void Solver::solve(Board& board, ResultBase& results) const
 {
     Solver::direction_t direction = Solver::Directions::N;
 
@@ -59,18 +59,20 @@ void Solver::solve(Board& board) const
         auto addedDirection = nextPosition(board, direction);
 
         if (board.isSolved()) {
-            board.output();
+            results.addSolved(board);
             // Pop the just added board solving position.
             board.pop_back();
             break;
         }
 
         if (!addedDirection.has_value()) {
+            // Dead end: the board is not solved and no allowed positions left.
+            results.addDeadEnd(board);
             break;
         }
 
         // Recursively call this function to test the further positions.
-        solve(board);
+        solve(board, results);
 
         // Pop the previous position.
         board.pop_back();

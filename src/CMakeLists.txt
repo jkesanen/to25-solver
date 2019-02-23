@@ -9,6 +9,9 @@ list(APPEND SOURCES
     board.cpp
     board.hpp
     main.cpp
+    resultbase.hpp
+    results.cpp
+    results.hpp
     solver.cpp
     solver.hpp
     types.hpp)

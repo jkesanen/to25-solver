@@ -17,6 +17,7 @@ bool Board::insert(const position_t position)
 
     auto result = mPositions.insert(position);
     if (!result.second) {
+        // std::set rejected this position as a duplicate.
         return false;
     }
 
@@ -46,7 +47,10 @@ std::optional<position_t> Board::latest() const
 
 void Board::output() const
 {
-    std::array<std::array<int, 5>, 5> board{ { 0 } };;
+    std::vector<std::vector<int>> board(mWidth, std::vector<int>(mHeight, 0));
+
+    assert(mOrder.size() <= (mWidth * mHeight));
+
     int step = 1;
     for (auto item : mOrder) {
         board[item.first][item.second] = step++;

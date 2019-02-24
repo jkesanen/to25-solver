@@ -17,10 +17,13 @@ const std::array<position_t, 8> Solver::sPositionUpdates{
 
 bool Solver::isAllowedPosition(Board& board, position_t pos) const
 {
+    const pos_coord_t boardWidth = static_cast<pos_coord_t>(board.width());
+    const pos_coord_t boardHeight = static_cast<pos_coord_t>(board.height());
+
     return ((pos.first >= 0) &&
-        (pos.first < board.width()) &&
+        (pos.first < boardWidth) &&
         (pos.second >= 0) &&
-        (pos.second < board.height()));
+        (pos.second < boardHeight));
 }
 
 std::optional<Solver::direction_t> Solver::nextPosition(Board& board, direction_t startDirection) const

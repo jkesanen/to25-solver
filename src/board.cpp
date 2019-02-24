@@ -6,7 +6,7 @@
 
 namespace to25 {
 
-Board::Board(const int width, const int height) :
+Board::Board(const std::size_t width, const std::size_t height) :
     mWidth(width),
     mHeight(height)
 {}
@@ -47,13 +47,13 @@ std::optional<position_t> Board::latest() const
 
 void Board::output() const
 {
-    std::vector<std::vector<int>> board(mWidth, std::vector<int>(mHeight, 0));
+    std::vector<std::vector<uint32_t>> board(mWidth, std::vector<uint32_t>(mHeight, 0));
 
     assert(mOrder.size() <= (mWidth * mHeight));
 
-    int step = 1;
+    uint32_t step = 1;
     for (auto item : mOrder) {
-        board[item.first][item.second] = step++;
+        board[static_cast<unsigned>(item.first)][static_cast<unsigned>(item.second)] = step++;
     }
 
     for (auto row : board) {
@@ -69,12 +69,12 @@ void Board::output() const
     }
 }
 
-int Board::width() const
+std::size_t Board::width() const
 {
     return mWidth;
 }
 
-int Board::height() const
+std::size_t Board::height() const
 {
     return mHeight;
 }

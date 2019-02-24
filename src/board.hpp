@@ -13,7 +13,7 @@ class Board {
 
 public:
 
-    Board(const int width, const int height);
+    Board(const std::size_t width, const std::size_t height);
 
     bool insert(const position_t position);
 
@@ -23,14 +23,14 @@ public:
 
     void output() const;
 
-    int width() const;
-    int height() const;
+    std::size_t width() const;
+    std::size_t height() const;
 
     bool isSolved() const;
 
 private:
-    int mWidth;
-    int mHeight;
+    std::size_t mWidth;
+    std::size_t mHeight;
 
     positions_t mPositions;
     order_t mOrder;

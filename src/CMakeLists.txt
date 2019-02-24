@@ -1,28 +1,17 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
-
-project(to25_solver)
+add_library(to25-solver "")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-list(APPEND SOURCES
-    board.cpp
-    board.hpp
-    main.cpp
-    resultbase.hpp
-    results.cpp
-    results.hpp
-    solver.cpp
-    solver.hpp
-    types.hpp)
+target_sources(to25-solver
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/board.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/board.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/resultbase.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/solver.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/solver.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/types.hpp)
 
-add_executable(to25_solver
-    ${SOURCES})
-
-target_compile_options(to25_solver PRIVATE
-                           # clang/GCC warnings
-                           $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
-                                -Wall -Wextra -Werror -Wconversion -Wsign-conversion >)
-                           # MSVC warnings
-                           #$<$<CXX_COMPILER_ID:MSVC>:
-                           #     "/W4 /WX" >)
+target_include_directories(to25-solver
+    PUBLIC
+        ${CMAKE_CURRENT_LIST_DIR}/.)

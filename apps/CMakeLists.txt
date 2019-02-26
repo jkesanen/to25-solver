@@ -3,8 +3,6 @@ project(to25)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories("../src")
-
 list(APPEND SOURCES
     main.cpp
     results.cpp

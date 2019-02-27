@@ -4,3 +4,6 @@ project(to25)
 
 add_subdirectory(libto25-solver)
 add_subdirectory(apps)
+
+enable_testing()
+add_subdirectory(tests)

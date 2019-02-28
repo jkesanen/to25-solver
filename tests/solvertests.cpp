@@ -64,3 +64,62 @@ TEST(SolverTest, NoNextPosition)
     // No possible moves left.
     ASSERT_FALSE(solver.nextPosition(gameboard, direction));
 }
+
+TEST(SolverTest, SolveSolvable)
+{
+    // Add positions of a solvable game.
+    /*  ******************
+        *  1     7  4    *
+        *  9    15 12    *
+        * 17  5    18  6 *
+        *  2 13  8  3 14 *
+        * 10 19 16 11    *
+        ******************/
+    std::vector<position_t> game{
+        position_t{ 0, 0 }, position_t{ 3, 0 }, position_t{ 3, 3 }, position_t{ 0, 3 },
+        position_t{ 2, 1 }, position_t{ 2, 4 }, position_t{ 0, 2 }, position_t{ 3, 2 },
+        position_t{ 1, 0 }, position_t{ 4, 0 }, position_t{ 4, 3 }, position_t{ 1, 3 },
+        position_t{ 3, 1 }, position_t{ 3, 4 }, position_t{ 1, 2 }, position_t{ 4, 2 },
+        position_t{ 2, 0 }, position_t{ 2, 3 }, position_t{ 4, 1 }
+    };
+
+    Board gameboard(5, 5);
+
+    // Populate the board.
+    for (auto position : game) {
+        ASSERT_TRUE(gameboard.insert(position));
+    }
+
+    class Results : public to25::ResultBase {
+
+    public:
+        Results() : mNumSolved(0) {}
+        void addSolved([[maybe_unused]] const to25::Board& board) override { ++mNumSolved; };
+        void addDeadEnd([[maybe_unused]] const to25::Board& board) override {};
+        uint32_t solved() const { return mNumSolved; };
+
+    private:
+        uint32_t mNumSolved;
+    };
+
+    {
+        Results results;
+
+        Solver solver;
+        solver.solve(gameboard, results);
+
+        ASSERT_EQ(1u, results.solved());
+    }
+
+    // Remove the last position (19th) and the game will have 3 possible solutions.
+    gameboard.pop_back();
+
+    {
+        Results results;
+
+        Solver solver;
+        solver.solve(gameboard, results);
+
+        ASSERT_EQ(3u, results.solved());
+    }
+}

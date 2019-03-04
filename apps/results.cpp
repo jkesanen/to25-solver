@@ -2,11 +2,6 @@
 
 #include "results.hpp"
 
-Results::Results() :
-    mNumSolved(0),
-    mNumDeadEnds(0)
-{};
-
 void Results::addSolved(const to25::Board& board)
 {
     mNumSolved++;

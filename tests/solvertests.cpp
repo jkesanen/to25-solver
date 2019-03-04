@@ -93,13 +93,12 @@ TEST(SolverTest, SolveSolvable)
     class Results : public to25::ResultBase {
 
     public:
-        Results() : mNumSolved(0) {}
         void addSolved([[maybe_unused]] const to25::Board& board) override { ++mNumSolved; };
         void addDeadEnd([[maybe_unused]] const to25::Board& board) override {};
         uint32_t solved() const { return mNumSolved; };
 
     private:
-        uint32_t mNumSolved;
+        uint32_t mNumSolved{0};
     };
 
     {

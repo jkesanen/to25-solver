@@ -17,8 +17,8 @@ const std::array<position_t, 8> Solver::sPositionUpdates{
 
 bool Solver::isAllowedPosition(Board& board, position_t pos) const
 {
-    const pos_coord_t boardWidth = static_cast<pos_coord_t>(board.width());
-    const pos_coord_t boardHeight = static_cast<pos_coord_t>(board.height());
+    const auto boardWidth = static_cast<pos_coord_t>(board.width());
+    const auto boardHeight = static_cast<pos_coord_t>(board.height());
 
     return ((pos.first >= 0) &&
         (pos.first < boardWidth) &&

@@ -21,7 +21,7 @@ With the combination of the games in the picture and the rules below, you should
 * The next number (increment by one) goes into a free square, which is either:
   * 3 squares up, down, left OR right from the current number (skip two squares).
   * 2 squares diagonally from the current number (skip one square).
-* By following these rules you'll try to get to number 25 by filling all the squares on the board.
+* By following these rules you'll try to get to number 25 by filling all the squares in the board.
 
 ## Solver
 
